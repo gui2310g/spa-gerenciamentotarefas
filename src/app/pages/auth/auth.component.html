@@ -1,1 +1,45 @@
-<p>auth works!</p>
+<main>
+  <form class="form">
+    <h2>Login</h2>
+
+    <div class="campo-input">
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+    </div>
+
+    <div class="campo-input">
+      <label for="password">Senha:</label>
+      <input type="password" id="password" name="password" required />
+    </div>
+
+    <button class="button-form" type="submit">Entrar</button>
+
+    <p>Não tem conta criada? <span (click)="openDialog()">clique aqui</span></p>
+  </form>
+
+  <div class="modal" [ngClass]="{ 'show-modal': showModal, 'hide-modal': !showModal }">
+    <div class="form">
+      <div class="register-header">
+        <h2>Cadastro</h2>
+        <button (click)="closeDialog()">X</button>
+      </div>
+
+      <div class="campo-input">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div class="campo-input">
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div class="campo-input">
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <button class="button-form" type="submit">Cadastrar</button>
+    </div>
+  </div>
+</main>

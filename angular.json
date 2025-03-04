@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "spa-sistemafinanceiro": {
+    "spa-gerenciamentotarefas": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/spa-sistemafinanceiro",
+            "outputPath": "dist/spa-gerenciamentotarefas",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "spa-sistemafinanceiro:build:production"
+              "buildTarget": "spa-gerenciamentotarefas:build:production"
             },
             "development": {
-              "buildTarget": "spa-sistemafinanceiro:build:development"
+              "buildTarget": "spa-gerenciamentotarefas:build:development"
             }
           },
           "defaultConfiguration": "development"

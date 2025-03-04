@@ -1,0 +1,63 @@
+@use "../../shared/utils/flex.scss";
+@use "../../shared/utils/widthHeight.scss";
+
+main {
+  @include flex.flex(column, center, center, 0, none);
+  @include widthHeight.widthHeight(100%, 100%, 100vh);
+
+  .form {
+    @include flex.flex(column, center, center, 20px, none);
+    padding: 20px;
+    max-width: 500px;
+    border-radius: 20px;
+    background-color: white;
+
+    .campo-input {
+      @include flex.flex(column, none, none, 5px, none);
+
+      input {
+        padding: 10px 20px;
+        border-radius: 10px;
+        border: none;
+        background-color: #f1f1f1;
+      }
+    }
+
+    .button-form {
+      padding: 10px;
+      width: 160px;
+      border-radius: 30px;
+      background-image: linear-gradient(#f01212, #ef6109);
+      border: none;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    span {
+      color: rgb(0, 174, 255);
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .register-header {
+      @include flex.flex(row, center, center, 20px, none);
+      margin-bottom: 20px;
+    }
+  }
+
+  .modal {
+    @include flex.flex(none, center, center, 0, none);
+    @include widthHeight.widthHeight(100%, 100%, 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+
+    &.show-modal { display: flex; }
+
+    &.hide-modal { display: none; }
+
+  }
+}

@@ -1,0 +1,5 @@
+@mixin widthHeight($width, $max-width, $height) {
+    width: $width;
+    max-width: $max-width;
+    height: $height;
+}
