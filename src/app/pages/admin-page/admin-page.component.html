@@ -36,18 +36,14 @@
   </article>
 </main>
 
-<div class="modal-overlay" [ngClass]="{'hide-modal': !showModal }">
-  <div class="modal">
-    <div class="modal-header">
-      <h2>Excluir usuário</h2>
-      <button (click)="CloseModal()">X</button>
-    </div>
-
-    <span>
-        Tem certeza de que deseja excluir o usuário?
-        Caso tenha uma task, ela será excluída junto.
-    </span>
-
-    <button>Excluir</button>
-  </div>
-</div>
+<app-modal
+  [showModal]="showModal"
+  (closeModal)="CloseModal()"
+  [title]="'Excluir usuário'"
+  [buttonName]="'Excluir'"
+>
+  <span>
+    Tem certeza de que deseja excluir o usuário?
+    Caso tenha uma tarefa, ela será excluída junto.
+  </span>
+</app-modal>
