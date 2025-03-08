@@ -1,4 +1,5 @@
 @use "../../shared/utils/flex.scss";
+@use "../../shared/utils/widthHeight.scss";
 
 header {
   background: linear-gradient(#f01212, #ef6109);
@@ -16,3 +17,42 @@ header {
     &:hover { color: #9f9d9d; }
   }
 }
+
+.main {
+  max-width: 1200px;
+  margin: 50px auto;
+
+  .article {
+    @include widthHeight.widthHeight(100%, 100%, none);
+    @include flex.flex(column, none, none, 0px, none);
+    background-color: #ffffff;
+    border-radius: 5px;
+
+    .article-header {
+      @include flex.flex(row, space-between, center, 5px, none);
+      padding: 10px;
+      border-bottom: 1px solid gray;
+
+      input {
+        height: 20px;
+        max-width: 350px;
+      }
+    }
+
+    .table {
+      max-width: 100%;
+      overflow-x: auto;
+      text-align: center;
+      height: 600px;
+
+      table {
+        width: 100%;
+
+        th, td { padding: 10px;}
+      }
+    }
+  }
+
+}
+
+.form { @include flex.flex(column, none, none, 10px, none);}

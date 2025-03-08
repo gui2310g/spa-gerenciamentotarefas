@@ -1,0 +1,12 @@
+<div class="modal-overlay" [ngClass]="{'hide-modal': !showModal }">
+  <div class="modal">
+    <div class="modal-header">
+      <h2>{{title}}</h2>
+      <button (click)="onClose()">X</button>
+    </div>
+
+    <ng-content></ng-content>
+
+    <button>{{buttonName}}</button>
+  </div>
+</div>

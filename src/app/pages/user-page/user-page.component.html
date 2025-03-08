@@ -4,4 +4,90 @@
   <a routerLink="/"><h4>Logout</h4></a>
 </header>
 
-<p>user-page works!</p>
+<main class="main">
+  <article class="article">
+    <div class="article-header">
+      <h3>Lista geral de tarefas</h3>
+      <form action="">
+        <input type="text" placeholder="Pesquisar titulo">
+      </form>
+
+      <button (click)="openAddModal()">Adicionar tarefa</button>
+    </div>
+    <div class="table">
+      <table>
+        <thead class="table-header">
+          <tr class="table-header">
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>Descrição</th>
+            <th>Data</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        @for(task of Tasks; track task.id) {
+          <tbody>
+            <tr>
+              <td>{{task.id}}</td>
+              <td>{{task.titulo}}</td>
+              <td>{{task.descricao}}</td>
+              <td>{{task.data}}</td>
+              <td>{{task.status}}</td>
+              <td>
+                <button (click)="openUpdateModal()">Atualizar</button>
+                <button (click)="openDeleteModal()">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        }
+      </table>
+  </div>
+  </article>
+</main>
+
+<!--modais-->
+
+<app-modal
+  [showModal]="showAddModal"
+  (closeModal)="closeAddModal()"
+  [title]="'Adicionar tarefa'"
+  [buttonName]="'Adicionar'"
+>
+  <form class="form">
+    <label for="titulo">Titulo:</label>
+    <input type="text" placeholder="Titulo" id="titulo">
+
+    <label for="descricao">Descrição:</label>
+    <input type="text" placeholder="Descrição" id="descricao">
+  </form>
+</app-modal>
+
+<app-modal
+  [showModal]="showDeleteModal"
+  (closeModal)="closeDeleteModal()"
+  [title]="'Excluir tarefa'"
+  [buttonName]="'Excluir'"
+>
+  <span>Ao excluir da lista a tarefa sera marcada como concluida, tem certeza disso?</span>
+</app-modal>
+
+<app-modal
+  [showModal]="showUpdateModal"
+  (closeModal)="closeUpdateModal()"
+  [title]="'Atualizar tarefa'"
+  [buttonName]="'Atualizar'"
+>
+  <form class="form">
+    <label for="titulo">Titulo:</label>
+    <input type="text" placeholder="Titulo" id="titulo">
+
+    <label for="descricao">Descrição:</label>
+    <input type="text" placeholder="Descrição" id="descricao">
+
+    <label for="status">Status:</label>
+    <select name="Definir Status" id="status">
+      <option value="Pendente">Pendente</option>
+      <option value="Concluido">Concluido</option>
+    </select>
+  </form>
+</app-modal>
