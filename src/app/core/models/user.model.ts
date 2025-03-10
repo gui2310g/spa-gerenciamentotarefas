@@ -6,7 +6,7 @@ export interface User {
   password: string
 }
 
-enum userTipo {
+export enum userTipo {
   ADMIN,
   USER
 }

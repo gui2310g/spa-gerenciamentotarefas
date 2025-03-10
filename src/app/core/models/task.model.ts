@@ -6,7 +6,7 @@ export interface Task {
   status: tipoTask
 }
 
-enum tipoTask {
+export enum tipoTask {
   PENDENTE,
   CONCLUIDO
 }
