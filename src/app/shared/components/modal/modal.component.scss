@@ -1,5 +1,5 @@
-@use "../../shared/utils/flex.scss";
-@use "../../shared/utils/widthHeight.scss";
+@use "../../utils/flex.scss";
+@use "../../utils/widthHeight.scss";
 
 .modal-overlay {
   @include widthHeight.widthHeight(100%, 100%, 100%);
