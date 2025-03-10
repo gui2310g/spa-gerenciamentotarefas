@@ -1,23 +1,37 @@
-import { Component } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { AuthService } from '../../core/services/auth.service';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
   standalone: true,
-  imports: [NgClass, ModalComponent],
+  imports: [ModalComponent, ReactiveFormsModule],
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
 })
-export class AuthComponent {
+export class AuthComponent implements OnInit {
   showModal: boolean = false;
+  loginForm!: FormGroup;
+  createForm!: FormGroup;
 
-  openDialog() {
-    this.showModal = true;
+  constructor(private fb: FormBuilder, private router: Router) {}
+
+  ngOnInit(): void {
+     this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+
+    this.createForm = this.fb.group({
+      email: ['', Validators.required],
+      name: ['', Validators.required],
+      password: ['', Validators.required, Validators.minLength(6)]
+    })
   }
 
-  closeDialog() {
-    this.showModal = false;
-  }
+  openDialog() { this.showModal = true; }
+
+  closeDialog() { this.showModal = false; }
 }
-

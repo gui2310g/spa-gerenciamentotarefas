@@ -18,23 +18,6 @@
     max-width: 300px;
 
     .modal-header { @include flex.flex(row, space-between, center, 10px, none); }
-
-    .button {
-      padding: 10px;
-      width: 160px;
-      border-radius: 30px;
-      background-image: linear-gradient(#f01212, #ef6109);
-      border: none;
-      font-size: 16px;
-      color: white;
-      cursor: pointer;
-      font-weight: 700;
-
-      &:hover {
-        background-image: linear-gradient(#ef6109, #f01212);
-        transition: 0.5s all;
-      }
-    }
   }
 
   &.hide-modal { display: none; }

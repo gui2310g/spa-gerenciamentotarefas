@@ -40,10 +40,11 @@
   [showModal]="showModal"
   (closeModal)="CloseModal()"
   [title]="'Excluir usuário'"
-  [buttonName]="'Excluir'"
 >
   <span>
     Tem certeza de que deseja excluir o usuário?
     Caso tenha uma tarefa, ela será excluída junto.
   </span>
+
+  <button class="button-form" type="submit">Excluir</button>
 </app-modal>

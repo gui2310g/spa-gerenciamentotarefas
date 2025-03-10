@@ -33,6 +33,11 @@ main {
       color: white;
       cursor: pointer;
       font-weight: 700;
+
+      &:hover {
+        background-image: linear-gradient(#ef6109, #f01212);
+        transition: 0.5s all;
+      }
     }
 
     span {

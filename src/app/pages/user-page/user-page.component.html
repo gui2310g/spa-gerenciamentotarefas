@@ -47,18 +47,15 @@
 
 <!--modais-->
 
-<app-modal
-  [showModal]="showAddModal"
-  (closeModal)="closeAddModal()"
-  [title]="'Adicionar tarefa'"
-  [buttonName]="'Adicionar'"
->
+<app-modal [showModal]="showAddModal" (closeModal)="closeAddModal()" [title]="'Adicionar tarefa'">
   <form class="form">
     <label for="titulo">Titulo:</label>
     <input type="text" placeholder="Titulo" id="titulo">
 
     <label for="descricao">Descrição:</label>
     <input type="text" placeholder="Descrição" id="descricao">
+
+    <button class="button-form" type="submit">Adicionar</button>
   </form>
 </app-modal>
 
@@ -66,16 +63,15 @@
   [showModal]="showDeleteModal"
   (closeModal)="closeDeleteModal()"
   [title]="'Excluir tarefa'"
-  [buttonName]="'Excluir'"
 >
   <span>Ao excluir da lista a tarefa sera marcada como concluida, tem certeza disso?</span>
+  <button class="button-form" type="submit">Excluir</button>
 </app-modal>
 
 <app-modal
   [showModal]="showUpdateModal"
   (closeModal)="closeUpdateModal()"
   [title]="'Atualizar tarefa'"
-  [buttonName]="'Atualizar'"
 >
   <form class="form">
     <label for="titulo">Titulo:</label>
@@ -89,5 +85,7 @@
       <option value="Pendente">Pendente</option>
       <option value="Concluido">Concluido</option>
     </select>
+
+    <button class="button-form" type="submit">Atualizar</button>
   </form>
 </app-modal>
