@@ -1,0 +1,24 @@
+@use "../../utils/flex.scss";
+@use "../../utils/widthHeight.scss";
+
+.header {
+  border-bottom: 2px solid black;
+  background: linear-gradient(#f01212, #ef6109);
+  max-width: 100%;
+  @include flex.flex(row, flex-end, center, 10px, none);
+  padding-right: 20px;
+  color: white;
+
+  img {
+    width: 50px;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+
+    &:hover {
+      color: #9f9d9d;
+    }
+  }
+}

@@ -1,23 +1,6 @@
 @use "../../shared/utils/flex.scss";
 @use "../../shared/utils/widthHeight.scss";
 
-header {
-  background: linear-gradient(#f01212, #ef6109);
-  border-bottom: 2px solid black;
-  @include flex.flex(row, end, center, 10px, none);
-  padding-right: 20px;
-  color: white;
-
-  img { width: 50px; }
-
-  a {
-    text-decoration: none;
-    color: white;
-
-    &:hover { color: #9f9d9d; }
-  }
-}
-
 .main {
   max-width: 1200px;
   margin: 50px auto;

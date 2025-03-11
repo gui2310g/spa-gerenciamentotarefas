@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 @Component({
   selector: 'app-admin-page',
   standalone: true,
-  imports: [RouterLink, ModalComponent],
+  imports: [ModalComponent],
   templateUrl: './admin-page.component.html',
   styleUrl: './admin-page.component.scss'
 })

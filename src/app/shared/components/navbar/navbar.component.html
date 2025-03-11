@@ -1,0 +1,7 @@
+<header class="header">
+  <img src="user.jpg" alt="user photo" />
+  @if(isLoggedIn()) {
+    <h4>{{user?.email}}</h4>
+  }
+  <a routerLink="/" (click)="logout()"><h4>Logout</h4></a>
+</header>
