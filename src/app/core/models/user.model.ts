@@ -2,11 +2,11 @@ export interface User {
   id: number,
   email: string,
   name: string,
-  tipo: userTipo,
+  tipo: userTipo.USER,
   password: string
 }
 
 export enum userTipo {
-  ADMIN,
-  USER
+  ADMIN = 'ROLE_ADMIN',
+  USER = 'ROLE_USER'
 }

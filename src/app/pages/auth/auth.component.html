@@ -1,5 +1,5 @@
 <main>
-  <form class="form" [formGroup]="loginForm">
+  <form class="form" [formGroup]="loginForm" (ngSubmit)="login()" method="post">
     <h2>Login</h2>
 
     <div class="campo-input">
@@ -12,20 +12,16 @@
       <input type="password" id="password" formControlName="password" name="password" required />
     </div>
 
-    <button class="button-form" type="submit">Entrar</button>
+    <button class="button-form" type="submit" (click)="login()">Entrar</button>
 
     <p>Não tem conta criada? <span (click)="openDialog()">clique aqui</span></p>
   </form>
 
-  <app-modal
-    [showModal]="showModal"
-    (closeModal)="closeDialog()"
-    [title]="'Cadastro'"
-  >
-    <form class="form" [formGroup]="createForm">
+  <app-modal [showModal]="showModal" (closeModal)="closeDialog()" [title]="'Cadastro'">
+    <form class="form" [formGroup]="createForm" method="post">
       <div class="campo-input">
         <label for="email">Email:</label>
-        <input type="email" id="email" name="email" formControlName="email" required />
+        <input type="email" id="email" name="email" formControlName="email" required/>
       </div>
 
       <div class="campo-input">

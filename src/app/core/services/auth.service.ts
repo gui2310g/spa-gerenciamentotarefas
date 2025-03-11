@@ -25,14 +25,13 @@ export class AuthService {
       );
   }
 
-
   createUser(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user).pipe(catchError(this.handleError));
+    return this.http.post<User>(`${this.apiUrl}/usuarios`, user).pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'An error occurred. Please try again.';
-    if (error.status === 409) errorMessage = 'User or email already exists';
+    let errorMessage = 'Invalid email or password';
+    if (error.status === 409) errorMessage;
 
     return throwError(() => new Error(errorMessage));
   }
