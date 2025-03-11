@@ -15,11 +15,11 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(loggedUser: LoggedUser): Observable<any> {
-    return this.http.post<{ token: string, user: User }>(`${this.apiUrl}/auth`, loggedUser)
+    return this.http.post<any>(`${this.apiUrl}/auth`, loggedUser)
       .pipe(
         tap((response) => {
           sessionStorage.setItem('token', response.token);
-          sessionStorage.setItem('user', JSON.stringify(response.user));
+          sessionStorage.setItem('role', response.role);
         }),
         catchError(this.handleError)
       );
@@ -29,10 +29,18 @@ export class AuthService {
     return this.http.post<User>(`${this.apiUrl}/usuarios`, user).pipe(catchError(this.handleError));
   }
 
-  private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Invalid email or password';
-    if (error.status === 409) errorMessage;
+  isLoggedIn(): boolean {
+    return sessionStorage.getItem('token') !== null;
+  }
 
+  getUserRole(): string | null {
+    return sessionStorage.getItem('role');
+  }
+  
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage: string;
+    if (error.status === 409) errorMessage = "Email ou senha invalido";
+    if (error.status === 400) errorMessage = "Email ja existente";
     return throwError(() => new Error(errorMessage));
   }
 }

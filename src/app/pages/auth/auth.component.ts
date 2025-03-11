@@ -21,9 +21,13 @@ export class AuthComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {}
 
-  openDialog() { this.showModal = true; }
+  openDialog() {
+    this.showModal = true;
+  }
 
-  closeDialog() { this.showModal = false }
+  closeDialog() {
+    this.showModal = false;
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -34,7 +38,7 @@ export class AuthComponent implements OnInit {
     this.createForm = this.fb.group({
       email: ['', Validators.required],
       name: ['', Validators.required],
-      password: ['', Validators.required, Validators.minLength(6)],
+      password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -43,12 +47,22 @@ export class AuthComponent implements OnInit {
       const loggedUser: LoggedUser = this.loginForm.value;
       this.authService.login(loggedUser).subscribe({
         next: (response) => {
-          if (response.role === userTipo.ADMIN) {
-            this.router.navigate(['admin']);
-          } else {
-            this.router.navigate(['user']);
-          }
+          setTimeout(() => {
+            this.router.navigate([response.role === userTipo.ADMIN ? 'admin' : 'user',]);
+          }, 1000);
         },
+      });
+    }
+  }
+
+  create(): void {
+    if (this.createForm.valid) {
+      const formData: User = this.createForm.value;
+      this.authService.createUser(formData).subscribe({
+        next: () =>
+          setTimeout(() => {
+            this.router.navigate(['user']);
+          }, 1000),
       });
     }
   }
