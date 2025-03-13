@@ -2,8 +2,9 @@ export interface User {
   id?: number,
   email?: string,
   name?: string,
-  tipo?: userTipo,
-  password?: string
+  status: userTipo,
+  password?: string,
+  token: string
 }
 
 export enum userTipo {

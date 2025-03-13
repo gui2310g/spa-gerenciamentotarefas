@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-user-page',
   standalone: true,
-  imports: [RouterLink, ModalComponent],
+  imports: [ModalComponent],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss'
 })

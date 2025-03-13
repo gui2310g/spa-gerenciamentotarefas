@@ -23,11 +23,11 @@ export class NavbarComponent implements OnInit {
       const payload = JSON.parse(atob(token.split('.')[1]));
       this.user = {
         email: payload.sub,
-        tipo: payload.role as userTipo
+        status: payload.role as userTipo,
+        token: token
       };
     }
   }
-
 
   isLoggedIn(): boolean {
     return sessionStorage.getItem('token') !== null;

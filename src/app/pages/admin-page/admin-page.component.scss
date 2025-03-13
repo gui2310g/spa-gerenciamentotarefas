@@ -1,24 +1,6 @@
 @use "../../shared/utils/flex.scss";
 @use "../../shared/utils/widthHeight.scss";
 
-.header {
-  background: linear-gradient(rgb(15, 173, 15), rgb(227, 227, 32));
-  border-bottom: 2px solid black;
-  max-width: 100%;
-  @include flex.flex(row, flex-end, center, 10px, none);
-  padding-right: 20px;
-  color: white;
-
-  img { width: 50px; }
-
-  a {
-    text-decoration: none;
-    color: white;
-
-    &:hover { color: #9f9d9d; }
-  }
-}
-
 .main {
   max-width: 1200px;
   margin: 50px auto;
@@ -29,15 +11,10 @@
     background-color: #ffffff;
     border-radius: 5px;
 
-    .article-header {
-      @include flex.flex(row, space-evenly, center, 0px, none);
-      padding: 10px;
+    h3 {
+      text-align: center;
+      padding: 20px;
       border-bottom: 1px solid gray;
-
-      input {
-        height: 20px;
-        width: 150px;
-      }
     }
 
     .table {
