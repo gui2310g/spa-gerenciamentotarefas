@@ -1,93 +1,50 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
+import { AdminService } from '../../core/services/admin/admin.service';
+import { User } from '../../core/models/user.model';
 @Component({
   selector: 'app-admin-page',
   standalone: true,
   imports: [ModalComponent],
   templateUrl: './admin-page.component.html',
-  styleUrl: './admin-page.component.scss'
+  styleUrl: './admin-page.component.scss',
 })
-export class AdminPageComponent {
+export class AdminPageComponent implements OnInit {
   showModal: boolean = false;
+  usuarios: User[] = [];
+  usuario!: User;
 
-  OpenModal(): void {
-    this.showModal = true
+  OpenModal(user: User): void {
+    this.usuario = user;
+    this.showModal = true;
   }
 
   CloseModal(): void {
-    this.showModal = false
+    this.showModal = false;
   }
 
-  Usuarios: any[] = [
-    {
-      id: 1,
-      nome: 'Juan',
-      email: 'juanmendes@gmail.com'
-    },
-    {
-      id: 2,
-      nome: 'Pedro',
-      email: 'pedrolopes@orkut.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 4,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 5,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 6,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 7,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 8,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 9,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
-    },
-    {
-      id: 3,
-      nome: 'Maria',
-      email: 'sandymaria@hotmail.com'
+  constructor(private adminService: AdminService) {}
+
+  ngOnInit(): void {
+    this.findAllUsers();
+  }
+
+  findAllUsers(): void {
+    this.adminService.findAllUsers().subscribe({
+      next: (data) => (this.usuarios = data),
+    });
+  }
+
+  deleteUsers(): void {
+    if (this.usuario) {
+      this.adminService.deleteUsers(this.usuario.id).subscribe({
+        next: () => {
+          this.usuarios = this.usuarios.filter(
+            (user) => user.id !== this.usuario!.id
+          );
+          this.CloseModal();
+        },
+      });
     }
-  ]
+  }
 }

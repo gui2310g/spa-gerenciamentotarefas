@@ -1,40 +1,44 @@
 <main class="main">
   <article class="article">
     <h3>Lista geral de usuario</h3>
-    
+
     <div class="table">
       <table>
-        <thead class="table-header">
-          <tr class="table-header">
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Email</th>
-          </tr>
-        </thead>
-        @for(user of Usuarios; track user.id) {
-          <tbody>
-            <tr>
-              <td>{{user.id}}</td>
-              <td>{{user.nome}}</td>
-              <td>{{user.email}}</td>
-              <td><button (click)="OpenModal()">Excluir</button></td>
+        @if(usuarios.length > 0) {
+          <thead class="table-header">
+            <tr class="table-header">
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Status</th>
             </tr>
-          </tbody>
-        }
+          </thead>
+
+          @for(user of usuarios; track user.id) {
+            <tbody>
+              <tr>
+                <td>{{user.id}}</td>
+                <td>{{user.name}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.status}}</td>
+                <td><button (click)="OpenModal(user)">Excluir</button></td>
+              </tr>
+            </tbody>
+          }
+        } @else { <h1>Nenhum usuario registrado</h1> }
       </table>
   </div>
   </article>
 </main>
 
-<app-modal
-  [showModal]="showModal"
-  (closeModal)="CloseModal()"
-  [title]="'Excluir usuário'"
->
-  <span>
-    Tem certeza de que deseja excluir o usuário?
-    Caso tenha uma tarefa, ela será excluída junto.
-  </span>
+@if(usuario) {
+  <app-modal [showModal]="showModal" (closeModal)="CloseModal()" [title]="'Excluir usuário'">
+    <span>
+        Tem certeza de que deseja excluir o usuário
+        <strong>{{usuario.name}}</strong>?
+        Caso tenha uma tarefa, ela será excluída junto.
+    </span>
 
-  <button class="button-form" type="submit">Excluir</button>
-</app-modal>
+    <button class="button-form" type="submit" (click)="deleteUsers()">Excluir</button>
+  </app-modal>
+}

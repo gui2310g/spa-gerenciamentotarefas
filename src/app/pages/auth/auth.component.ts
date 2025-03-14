@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
-import { AuthService } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth/auth.service';
 import {
   FormBuilder,
   FormGroup,

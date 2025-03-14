@@ -22,6 +22,7 @@ export class NavbarComponent implements OnInit {
     if (token) {
       const payload = JSON.parse(atob(token.split('.')[1]));
       this.user = {
+        id: payload.id,
         email: payload.sub,
         status: payload.role as userTipo,
         token: token
