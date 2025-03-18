@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { DATE_PIPE_DEFAULT_OPTIONS } from '@angular/common';
+import { ErrorInterceptor } from './core/interceptors/error.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +14,8 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptorsFromDi()),
     { provide: HTTP_INTERCEPTORS, useClass: authInterceptor, multi: true },
-    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: "longDate" }}
+    { provide: DATE_PIPE_DEFAULT_OPTIONS, useValue: { dateFormat: "longDate" }},
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    provideAnimationsAsync()
   ],
 };
