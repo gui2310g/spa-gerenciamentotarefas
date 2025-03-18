@@ -1,7 +1,7 @@
 <main class="main">
   <article class="article">
     <div class="article-header">
-      <h3>Lista geral de tarefas</h3>
+      <h4>Lista geral de tarefas</h4>
       <button (click)="openModal('add')">Adicionar tarefa</button>
     </div>
     <div class="table">
@@ -33,7 +33,7 @@
               </tr>
             </tbody>
           }
-        } @else { <h1>Não ha tarefa cadastrada</h1> }
+        } @else { <h4>Não ha tarefa cadastrada</h4> }
       </table>
   </div>
   </article>
@@ -54,7 +54,7 @@
 </app-modal>
 
 <app-modal [showModal]="activeModal === 'delete'" (closeModal)="closeModal()" [title]="'Excluir'">
-  <span>Ao excluir da lista a tarefa sera marcada como concluida, tem certeza disso?</span>
+  <span>tem certeza disso que deseja excluir a tarefa?</span>
   <button class="button-form" type="submit" (click)="deleteTasks()">Excluir</button>
 </app-modal>
 
@@ -68,9 +68,8 @@
 
     <label for="status">Status:</label>
     <select name="Definir Status" id="status" formControlName="status">
-      @for(status of statuses; track statuses) {
-        <option [value]="status">{{status}}</option>
-      }
+      <option value="PENDENTE">Pendente</option>
+      <option value="CONCLUIDA">Concluída</option>
     </select>
 
     <button class="button-form" type="submit">Atualizar</button>

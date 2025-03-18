@@ -17,7 +17,11 @@
     text-align: center;
     max-width: 300px;
 
-    .modal-header { @include flex.flex(row, space-between, center, 10px, none); }
+    .modal-header {
+      @include flex.flex(row, space-between, center, 10px, none);
+
+      h4 { font-size: 20px;}
+    }
   }
 
   &.hide-modal { display: none; }

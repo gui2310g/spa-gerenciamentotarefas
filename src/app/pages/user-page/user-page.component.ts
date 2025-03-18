@@ -14,7 +14,6 @@ import { DatePipe } from '@angular/common';
 export class UserPageComponent implements OnInit{
   tasks: Task[] = [];
   task!: Task;
-  statuses = Object.keys(tipoTask).filter(key => isNaN(Number(key)));
   activeModal: 'add' | 'update' | 'delete' | null = null;
   taskForm!: FormGroup;
 
