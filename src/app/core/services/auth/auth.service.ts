@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../../../environments/environment.development';
 import { Observable, throwError } from 'rxjs';
+import { NotificationService } from '../notification/notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ import { Observable, throwError } from 'rxjs';
 export class AuthService {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private notificationService: NotificationService) {}
 
   login(loggedUser: LoggedUser): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/auth`, loggedUser).pipe(
@@ -20,7 +21,7 @@ export class AuthService {
         sessionStorage.setItem('token', response.token);
         sessionStorage.setItem('role', response.role);
       }),
-      catchError(this.handleError)
+      catchError(() => this.handleLoginError())
     );
   }
 
@@ -30,7 +31,7 @@ export class AuthService {
         sessionStorage.setItem('token', response.token);
         sessionStorage.setItem('role', response.status);
       }),
-      catchError(this.handleError)
+      catchError(() => this.handleCreateError())
     );
   }
 
@@ -44,10 +45,21 @@ export class AuthService {
   }
 
 
-  private handleError(error: HttpErrorResponse) {
+  private handleCreateError(): Observable<never> {
     let errorMessage: string;
-    if (error.status === 409) errorMessage = 'Email ou senha invalido';
-    if (error.status === 400) errorMessage = 'Email ja existente ou inexistente';
+    errorMessage = 'Este email já existe';
+
+    this.notificationService.show(errorMessage);
+
     return throwError(() => new Error(errorMessage));
+  }
+
+  private handleLoginError(): Observable<never> {
+     let errorMessage: string;
+     errorMessage = 'Email ou senha inválido.';
+
+     this.notificationService.show(errorMessage);
+
+     return throwError(() => new Error(errorMessage));
   }
 }
