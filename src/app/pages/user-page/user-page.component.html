@@ -2,34 +2,38 @@
   <article class="article">
     <div class="article-header">
       <h3>Lista geral de tarefas</h3>
-      <button (click)="openAddModal()">Adicionar tarefa</button>
+      <button (click)="openModal('add')">Adicionar tarefa</button>
     </div>
     <div class="table">
       <table>
-        <thead class="table-header">
-          <tr class="table-header">
-            <th>Id</th>
-            <th>Titulo</th>
-            <th>Descrição</th>
-            <th>Data</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        @for(task of Tasks; track task.id) {
-          <tbody>
-            <tr>
-              <td>{{task.id}}</td>
-              <td>{{task.titulo}}</td>
-              <td>{{task.descricao}}</td>
-              <td>{{task.data}}</td>
-              <td>{{task.status}}</td>
-              <td>
-                <button (click)="openUpdateModal()">Atualizar</button>
-                <button (click)="openDeleteModal()">Excluir</button>
-              </td>
+        @if(tasks.length > 0) {
+          <thead class="table-header">
+            <tr class="table-header">
+              <th>Id</th>
+              <th>Titulo</th>
+              <th>Descrição</th>
+              <th>Data</th>
+              <th>Status</th>
             </tr>
-          </tbody>
-        }
+          </thead>
+          @for(task of tasks; track task.id) {
+            <tbody>
+              <tr>
+                <td>{{task.id}}</td>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.dueDate | date }}</td>
+                <td>{{task.status}}</td>
+                <td>
+                  @if(task.status === "PENDENTE") {
+                    <button (click)="openModal('update', task)">Atualizar</button>
+                  }
+                  <button (click)="openModal('delete', task)">Excluir</button>
+                </td>
+              </tr>
+            </tbody>
+          }
+        } @else { <h1>Não ha tarefa cadastrada</h1> }
       </table>
   </div>
   </article>
@@ -37,43 +41,36 @@
 
 <!--modais-->
 
-<app-modal [showModal]="showAddModal" (closeModal)="closeAddModal()" [title]="'Adicionar tarefa'">
-  <form class="form">
+<app-modal [showModal]="activeModal === 'add'" (closeModal)="closeModal()" [title]="'Adicionar'">
+  <form class="form" [formGroup]="taskForm" (ngSubmit)="createTask()">
     <label for="titulo">Titulo:</label>
-    <input type="text" placeholder="Titulo" id="titulo">
+    <input type="text" placeholder="Titulo" formControlName="title" name="titulo">
 
     <label for="descricao">Descrição:</label>
-    <input type="text" placeholder="Descrição" id="descricao">
+    <input type="text" placeholder="Descrição" formControlName="description" id="descricao">
 
     <button class="button-form" type="submit">Adicionar</button>
   </form>
 </app-modal>
 
-<app-modal
-  [showModal]="showDeleteModal"
-  (closeModal)="closeDeleteModal()"
-  [title]="'Excluir tarefa'"
->
+<app-modal [showModal]="activeModal === 'delete'" (closeModal)="closeModal()" [title]="'Excluir'">
   <span>Ao excluir da lista a tarefa sera marcada como concluida, tem certeza disso?</span>
-  <button class="button-form" type="submit">Excluir</button>
+  <button class="button-form" type="submit" (click)="deleteTasks()">Excluir</button>
 </app-modal>
 
-<app-modal
-  [showModal]="showUpdateModal"
-  (closeModal)="closeUpdateModal()"
-  [title]="'Atualizar tarefa'"
->
-  <form class="form">
+<app-modal [showModal]="activeModal === 'update'" (closeModal)="closeModal()" [title]="'Atualizar'">
+  <form class="form" (ngSubmit)="updateTask()" [formGroup]="taskForm">
     <label for="titulo">Titulo:</label>
-    <input type="text" placeholder="Titulo" id="titulo">
+    <input type="text" placeholder="Titulo" formControlName="title" id="titulo">
 
     <label for="descricao">Descrição:</label>
-    <input type="text" placeholder="Descrição" id="descricao">
+    <input type="text" placeholder="Descrição" formControlName="description" id="descricao">
 
     <label for="status">Status:</label>
-    <select name="Definir Status" id="status">
-      <option value="Pendente">Pendente</option>
-      <option value="Concluido">Concluido</option>
+    <select name="Definir Status" id="status" formControlName="status">
+      @for(status of statuses; track statuses) {
+        <option [value]="status">{{status}}</option>
+      }
     </select>
 
     <button class="button-form" type="submit">Atualizar</button>

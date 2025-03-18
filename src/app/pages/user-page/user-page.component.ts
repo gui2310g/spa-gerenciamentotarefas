@@ -1,35 +1,94 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalComponent } from '../../shared/components/modal/modal.component';
-
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Task, tipoTask } from '../../core/models/task.model';
+import { TaskService } from '../../core/services/task/task.service';
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-user-page',
   standalone: true,
-  imports: [ModalComponent],
+  imports: [ModalComponent, ReactiveFormsModule, DatePipe],
   templateUrl: './user-page.component.html',
   styleUrl: './user-page.component.scss'
 })
-export class UserPageComponent {
-  showUpdateModal: boolean = false;
-  showDeleteModal: boolean = false;
-  showAddModal: boolean = false;
+export class UserPageComponent implements OnInit{
+  tasks: Task[] = [];
+  task!: Task;
+  statuses = Object.keys(tipoTask).filter(key => isNaN(Number(key)));
+  activeModal: 'add' | 'update' | 'delete' | null = null;
+  taskForm!: FormGroup;
 
-  openAddModal(): void { this.showAddModal = true; }
+  constructor(private taskService: TaskService, private fb: FormBuilder) {}
 
-  closeAddModal(): void { this.showAddModal = false; }
+  ngOnInit(): void {
+    this.findAllTasks();
 
-  openDeleteModal(): void { this.showDeleteModal = true; }
+    this.taskForm = this.fb.group({
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      status: [tipoTask.PENDENTE]
+    });
+  }
 
-  closeDeleteModal(): void { this.showDeleteModal = false; }
+  openModal(type: 'add' | 'update' | 'delete', task?: Task): void {
+    this.activeModal = type;
 
-  openUpdateModal(): void { this.showUpdateModal = true; }
+    if (task) {
+      this.task = task;
+      this.taskForm.patchValue({
+        title: task.title,
+        description: task.description,
+        status: task.status,
+      });
+    } else if (type === 'add') {
+      this.taskForm.reset({
+        status: tipoTask.PENDENTE,
+      });
+    }
+  }
 
-  closeUpdateModal(): void { this.showUpdateModal = false; }
+  closeModal(): void {
+    this.activeModal = null;
+  }
 
-  Tasks: any[] = Array.from({ length: 15 }, (_, index) => ({
-    id: index + 1,
-    titulo: 'Banco',
-    descricao: 'Realizando um saque no banco',
-    data: '2021-10-10',
-    status: 'Pendente'
-  }));
+  findAllTasks(): void {
+    this.taskService.findAllTasks().subscribe({
+      next: (data) => (this.tasks = data)
+    })
+  }
+
+  createTask(): void {
+    if (this.taskForm.valid) {
+      const formData = this.taskForm.value;
+      this.taskService.createTask(formData).subscribe({
+        next: () => {
+          this.findAllTasks();
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  updateTask(): void {
+    if (this.taskForm.valid && this.task) {
+      const formData = this.taskForm.value;
+      this.taskService.updateTask(this.task.id, formData).subscribe({
+        next: () => {
+          this.findAllTasks();
+          this.closeModal();
+        }
+      });
+    }
+  }
+
+  deleteTasks(): void {
+    if (this.task) {
+      this.taskService.deleteTask(this.task.id).subscribe({
+        next: () => {
+          this.tasks = this.tasks.filter((t) => t.id !== this.task.id);
+          this.closeModal();
+        }
+      });
+    }
+  }
 }

@@ -1,12 +1,12 @@
 export interface Task {
   id: number,
-  titulo: string,
-  descricao: string,
-  data: Date,
+  title: string,
+  description: string,
+  dueDate: Date,
   status: tipoTask
 }
 
 export enum tipoTask {
-  PENDENTE,
-  CONCLUIDO
+  PENDENTE = 'PENDENTE',
+  CONCLUIDA = 'CONCLUIDA'
 }

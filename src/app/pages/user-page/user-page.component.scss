@@ -39,7 +39,7 @@
 }
 
 .form {
-  @include flex.flex(column, none, none, 10px, none);
+  @include flex.flex(column, none, center, 10px, none);
 }
 
 .button-form {
