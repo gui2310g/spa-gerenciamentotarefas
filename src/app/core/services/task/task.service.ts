@@ -17,7 +17,7 @@ export class TaskService {
   }
 
   findAllTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(`${this.apiUrl}/tasks`);
+    return this.http.get<Task[]>(`${this.apiUrl}/tasks/findByAuth`);
   }
 
   updateTask(id: number, task: Task): Observable<Task> {
