@@ -1,27 +1,55 @@
-# SpaGerenciamentoTarefas
+# Spa Gerenciamento-Tarefas
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.5.
+Este é e o Single Page Application(SPA) desenvolvido em Angular  do projeto full-stack de gerenciamento de tarefas, o spa possui as paginas de autenticação, usuario e tasks, a pagina inicial com opção de login e cadastro através do modal, o usuario e tasks com uma navegação com opção de logout, na pagina usuario com a visualização dos usuarios com opção de excluir, e as tasks com opçao de adicionar, atualizar e excluir tarefas. O projeto possui sistema de autenticação, guards e interceptors, assim o usuario evitando entrar em pagina usuarios (somente o admin pode entrar) e vice-versa. Foram utilizados bibliotecas como Angular Material, responsivo a celulares e suporte a Docker.
 
-## Development server
+# Layout 
+![Captura de tela 2025-03-25 105631](https://github.com/user-attachments/assets/4edb5fc1-f03e-459e-a823-f151e66e595e)
+![Captura de tela 2025-03-25 105619](https://github.com/user-attachments/assets/f3283c9e-6907-421f-b9c4-4a4c4ff8ad66)
+![Captura de tela 2025-03-25 105531](https://github.com/user-attachments/assets/96fa8c6a-2738-41a0-9bc1-1a53bf768244)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Code scaffolding
+## Ferramentas Utilizadas
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+#### Angular 18
+#### Angular Material 
+#### Typescript
+#### SCSS 
+#### Docker
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Requisitos
 
-## Running unit tests
+#### Node 22
+#### Docker
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+## Configuração
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Clona o projeto
 
-## Further help
+```bash
+https://github.com/gui2310g/spa-gerenciamentotarefas.git
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Instale o npm
+
+```bash
+npm install
+```
+
+**Certifique-se de configurar o enviromnent**
+
+Realize esse comando com o docker baixado.
+
+
+```bash
+docker pull gui2310g/spa-gerenciamentotarefas:latest
+```
+
+Para testar o back-end do projeto, clique no link abaixo para mais detalhes
+
+https://github.com/gui2310g/api_gerenciamentotarefas
+
+## Contribuir
+
+Caso queria contribuir para o projeto, apontando erros ou features, abre uma pull request
